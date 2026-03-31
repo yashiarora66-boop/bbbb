@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bonton Furniture Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #F5F0EA;
+    --surface: #FFFFFF;
+    --surface2: #EDE8E1;
+    --orange: #CC5214;
+    --orange-hover: #B8470F;
+    --text: #1C1410;
+    --muted: #7A6C5D;
+    --border-soft: rgba(0,0,0,0.08);
+    --shadow: 0 1px 4px rgba(0,0,0,0.06);
+    --shadow-hover: 0 6px 20px rgba(204,82,20,0.13);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Raleway', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.035; pointer-events: none; z-index: 999;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; top: -25%; left: 50%; transform: translateX(-50%);
+    width: 90vw; height: 55vh;
+    background: radial-gradient(ellipse, rgba(204,82,20,0.07) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .top-rule {
+    position: fixed; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--orange), #E8901A, var(--orange), transparent);
+    z-index: 200;
+  }
+
+  .page {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 56px 20px 44px;
+    gap: 0;
+  }
+
+  /* ── IMAGE LOGO ── */
+  .logo-wrap {
+    animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) both;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+
+  .logo-img {
+    width: min(300px, 75vw);
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .section-sep {
+    display: flex; align-items: center; gap: 10px;
+    width: 100%; max-width: 380px;
+    margin: 0 0 14px;
+  }
+  .section-sep span {
+    font-size: 9.5px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--muted);
+    white-space: nowrap; font-weight: 500;
+  }
+  .section-sep::before, .section-sep::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(0,0,0,0.1), transparent);
+  }
+
+  /* ── ACTION CARDS ── */
+  .actions {
+    display: flex; flex-direction: column; gap: 9px;
+    width: 100%; max-width: 380px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.15s cubic-bezier(0.22,1,0.36,1) both;
+  }
+
+  .action-card {
+    display: flex; align-items: center; gap: 14px;
+    padding: 15px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    text-decoration: none; color: var(--text);
+    transition: all 0.25s ease;
+    position: relative; overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .action-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--orange);
+    transform: scaleY(0); transition: transform 0.25s ease;
+    transform-origin: bottom;
+  }
+  .action-card:hover { transform: translateX(5px); box-shadow: var(--shadow-hover); border-color: rgba(204,82,20,0.2); }
+  .action-card:hover::before { transform: scaleY(1); }
+
+  .action-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface2); border: 1px solid var(--border-soft);
+    border-radius: 4px;
+  }
+  .action-icon svg { width: 18px; height: 18px; stroke: var(--orange); fill: none; stroke-width: 1.6; }
+
+  .action-label {
+    font-weight: 600; font-size: 12.5px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .action-sub {
+    font-size: 10.5px; color: var(--muted);
+    margin-top: 2px; font-weight: 300; letter-spacing: 0.03em;
+  }
+
+  .action-arrow {
+    margin-left: auto; color: var(--muted); font-size: 14px;
+    transition: color 0.25s, transform 0.25s;
+  }
+  .action-card:hover .action-arrow { color: var(--orange); transform: translateX(3px); }
+
+  /* ── CREATIVE CONTACT GRID ── */
+  .connect-section {
+    width: 100%; max-width: 380px;
+    animation: fadeUp 0.8s 0.3s cubic-bezier(0.22,1,0.36,1) both;
+    margin-bottom: 10px;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .contact-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 14px 6px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.28s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-btn::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--orange);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    z-index: 0;
+  }
+  .contact-btn:hover::after { opacity: 0.06; }
+  .contact-btn:hover {
+    border-color: rgba(204,82,20,0.35);
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 8px 22px rgba(204,82,20,0.16);
+  }
+
+  .btn-icon-wrap {
+    position: relative; z-index: 1;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface2);
+    border-radius: 50%;
+    transition: background 0.25s, transform 0.25s;
+  }
+  .contact-btn:hover .btn-icon-wrap {
+    background: rgba(204,82,20,0.1);
+    transform: rotate(-6deg) scale(1.1);
+  }
+
+  .btn-icon-wrap svg {
+    width: 17px; height: 17px;
+    fill: var(--muted);
+    transition: fill 0.25s;
+  }
+  .contact-btn:hover .btn-icon-wrap svg { fill: var(--orange); }
+
+  .contact-btn.stroke .btn-icon-wrap svg {
+    fill: none;
+    stroke: var(--muted);
+    stroke-width: 1.8;
+    transition: stroke 0.25s;
+  }
+  .contact-btn.stroke:hover .btn-icon-wrap svg { stroke: var(--orange); fill: none; }
+
+  .btn-label {
+    position: relative; z-index: 1;
+    font-size: 8.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.25s;
+  }
+  .contact-btn:hover .btn-label { color: var(--orange); }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 30px;
+    font-size: 9.5px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--muted); opacity: 0.4;
+    animation: fadeUp 0.8s 0.45s cubic-bezier(0.22,1,0.36,1) both;
+    text-align: center;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 420px) {
+    .actions, .connect-section, .section-sep { max-width: 100%; }
+    .contact-grid { grid-template-columns: repeat(4, 1fr); gap: 7px; }
+  }
+</style>
+</head>
+<body>
+<div class="top-rule"></div>
+
+<main class="page">
+
+  <div class="logo-wrap">
+    <img class="logo-img" src="data:image/png;base64,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" alt="Bonton Furniture Solutions" />
+  </div>
+
+  <!-- QUICK LINKS LABEL -->
+  <div class="section-sep" style="animation: fadeUp 0.8s 0.1s cubic-bezier(0.22,1,0.36,1) both;">
+    <span>Quick Links</span>
+  </div>
+
+  <!-- MAIN ACTIONS -->
+  <div class="actions">
+
+    <a href="https://www.bontonfurniture.net/" target="_blank" rel="noopener" class="action-card">
+      <div class="action-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div>
+        <div class="action-label">Our Website</div>
+        <div class="action-sub">Explore the full Bonton experience</div>
+      </div>
+      <span class="action-arrow">→</span>
+    </a>
+
+    <a href="https://drive.google.com/drive/folders/1iFtbsHJ4rEu2zzLLiyYrznC3M2Fi0AdP" target="_blank" rel="noopener" class="action-card">
+      <div class="action-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <div class="action-label">Product Catalogue</div>
+        <div class="action-sub">Browse our complete furniture range</div>
+      </div>
+      <span class="action-arrow">→</span>
+    </a>
+
+    <a href="https://www.youtube.com/watch?si=Tj5jwBOVAPSe46k2&v=IpuLYG3P5bM&feature=youtu.be" target="_blank" rel="noopener" class="action-card">
+      <div class="action-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div>
+        <div class="action-label">Factory Tour</div>
+        <div class="action-sub">See our craftsmanship in action</div>
+      </div>
+      <span class="action-arrow">→</span>
+    </a>
+
+  </div>
+
+  <!-- CONNECT WITH US -->
+  <div class="connect-section">
+    <div class="section-sep" style="margin-bottom:14px;">
+      <span>Connect with us</span>
+    </div>
+
+    <div class="contact-grid">
+
+      <a href="tel:+919522274222" class="contact-btn stroke" title="+91 9522274222">
+        <div class="btn-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+        </div>
+        <span class="btn-label">Call</span>
+      </a>
+
+      <a href="/cdn-cgi/l/email-protection#3b52555d547b5954554f54555d4e4955524f4e495e15555e4f" class="contact-btn stroke" title="info@bontonfurniture.net">
+        <div class="btn-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <span class="btn-label">Email</span>
+      </a>
+
+      <a href="https://in.linkedin.com/company/bonton-furniture-solution" target="_blank" rel="noopener" class="contact-btn" title="LinkedIn">
+        <div class="btn-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <span class="btn-label">LinkedIn</span>
+      </a>
+
+      <a href="https://www.instagram.com/bontonfurniture/" target="_blank" rel="noopener" class="contact-btn stroke" title="Instagram">
+        <div class="btn-icon-wrap">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" style="fill:var(--muted);stroke:none"/>
+          </svg>
+        </div>
+        <span class="btn-label">Instagram</span>
+      </a>
+
+      <a href="https://www.youtube.com/@BontonFurnitureSolutions" target="_blank" rel="noopener" class="contact-btn" title="YouTube">
+        <div class="btn-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" style="fill:white"/></svg>
+        </div>
+        <span class="btn-label">YouTube</span>
+      </a>
+
+      <a href="https://www.facebook.com/bontonfurniture1" target="_blank" rel="noopener" class="contact-btn" title="Facebook">
+        <div class="btn-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </div>
+        <span class="btn-label">Facebook</span>
+      </a>
+
+      <a href="https://x.com/BontonFurniture" target="_blank" rel="noopener" class="contact-btn" title="Twitter / X">
+        <div class="btn-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.745l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </div>
+        <span class="btn-label">Twitter</span>
+      </a>
+
+      <a href="https://www.bing.com/maps/search?trk=org-locations_url&q=7-A%2C+Scheme+No.+71%2C+Near+Chandan+Nagar+Police+Station%2C+Dhar+Road+Indore+452002+Madhaya+Pradesh+IN&cp=22.714270%7E75.842869&lvl=13.6&style=r" target="_blank" rel="noopener" class="contact-btn stroke" title="Visit Us — Indore">
+        <div class="btn-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <span class="btn-label">Visit Us</span>
+      </a>
+
+    </div>
+  </div>
+
+  <p class="footer">Bonton Furniture Solutions &nbsp;·&nb
